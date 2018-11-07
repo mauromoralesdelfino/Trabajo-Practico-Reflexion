@@ -20,7 +20,14 @@ parámetro, ejecutando el getter dentro del objeto.*/
 	
 	public static ArrayList<Field> obtenerAtributos(Object o)
 	{
-		return null;
+		ArrayList<Field> campos = new ArrayList<Field>();
+		Field[] fields = o.getClass().getDeclaredFields();
+		
+		for(int i=0; i< fields.length;i++)
+		{
+		campos.add(fields[i]);
+		}
+		return campos;
 		
 	}
 	
