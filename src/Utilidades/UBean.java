@@ -31,14 +31,61 @@ parámetro, ejecutando el getter dentro del objeto.*/
 		
 	}
 	
+	/*b. ejecutarSet(Object o, String att, Object valor): Se debe ejecutar el método
+	Setter del String dentro del Object.*/
+	
 	public static void ejecutarSet(Object o, String att, Object valor)
 	{
+		try
+		{
+			
+			
+			Method[] metodos = o.getClass().getDeclaredMethods();
+			String aux = att.substring(0, 1).toUpperCase() +att.substring(1);
+			String nombre = "set"+aux;
+			
+			for(Method misMet : metodos)
+			{
+				if(nombre.equals(misMet.getName()))
+				{
+					misMet.invoke(o, valor);
+				}
+			}
 		
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	public static Object ejecutarGet(Object o,String att)
 	{
-		return null;
+		Object obj = null;
+
+		try
+		{
+			Method[] metodos = o.getClass().getDeclaredMethods();
+			String aux = att.substring(0, 1).toUpperCase() +att.substring(1);
+			String nombre = "get"+aux;
+				
+			
+			for(Method misMet : metodos)
+			{
+				if(nombre.equals(misMet.getName()))
+				{
+					obj = misMet.invoke(o, new Object[0]);
+				}
+			}
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		return obj;
+		
 	}
 	
 	public void noHagonada()
